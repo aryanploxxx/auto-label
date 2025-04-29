@@ -3,6 +3,13 @@ name: Auto Label PR based on Base Branch
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
+    branches:
+      - dev
+      - staging
+      - main
+
+permissions:
+  pull-requests: write
 
 jobs:
   add-label:
@@ -15,4 +22,4 @@ jobs:
           labels: |
             ${{ github.event.pull_request.base.ref == 'dev' && 'dev' || '' }}
             ${{ github.event.pull_request.base.ref == 'staging' && 'staging' || '' }}
-            ${{ github.event.pull_request.base.ref == 'master' && 'master' || '' }}
+            ${{ github.event.pull_request.base.ref == 'main' && 'main' || '' }}
